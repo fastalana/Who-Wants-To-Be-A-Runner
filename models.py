@@ -1,10 +1,16 @@
-from sqlalchemy import Column, Integer, String, create_engine
+from sqlalchemy import (
+    Column, 
+    create_engine,
+    Date,
+    ForeignKey,
+    Integer, 
+    String)  
 from flask_sqlalchemy import SQLAlchemy
 import json
 import os
 
-database_path = os.environ['DATABASE_URL']
-# database_path = 'postgres://alanabellucci@localhost:5432/herokutest'
+# database_path = os.environ['DATABASE_URL']
+database_path = 'postgres://alanabellucci@localhost:5432/runners'
 
 db = SQLAlchemy()
 
@@ -22,6 +28,8 @@ class Athlete(db.Model):
     first_name = Column(String)
     last_name = Column(String)
 
+    # stat = db.relationship('Athlete', secondary = 'stats')
+
     def athlete_to_dictionary(self):
         return{
             'id': self.id,
@@ -31,3 +39,18 @@ class Athlete(db.Model):
 
     def __repr__(self):
         return f'<Athlete Id: {self.id}, First Name: {self.first_name}, Last Name: {self.last_name}>'
+
+class Stat(db.Model):
+    __tablename__ = "stats"
+
+    id = Column(Integer, primary_key=True)
+    athlete_id = Column(Integer, ForeignKey('athletes.id'), primary_key=True)
+    avg_miles_per_week = Column(Integer)
+    avg_vertical_per_week = Column(Integer)
+    longest_run = Column(Integer)
+    longest_run_2_weeks = Column(Integer)
+    race_distance = Column(Integer)
+    race_veritcal = Column(Integer)
+    race_date = Column(Date)
+
+    # athlete = db.relationship('Athlete') # allows us to call Athlete fields on Stat

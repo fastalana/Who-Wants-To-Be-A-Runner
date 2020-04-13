@@ -54,3 +54,19 @@ class Stat(db.Model):
     race_date = Column(Date)
 
     # athlete = db.relationship('Athlete') # allows us to call Athlete fields on Stat
+
+    def stat_to_dictionary(self):
+        return{
+            'id': self.id,
+            'athlete id': self.athlete_id,
+            'average miles per week': self.avg_miles_per_week,
+            'average vertical per week': self.avg_vertical_per_week,
+            'longest run': self.longest_run,
+            'longest run in the last two weeks': self.longest_run_2_weeks,
+            'race distance': self.race_distance,
+            'race vertical': self.race_veritcal,
+            'race_date': self.race_date
+        }
+
+    def __repr__(self):
+        return f'<Stat Id: {self.id}, Stat Athlete Id: {self.athlete_id}>'

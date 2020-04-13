@@ -1,6 +1,6 @@
 import os
-from flask import Flask
-from models import setup_db
+from flask import Flask, request, abort, jsonify
+from models import setup_db, Athlete, Stat
 from flask_cors import CORS
 
 def create_app(test_config=None):
@@ -9,6 +9,34 @@ def create_app(test_config=None):
     setup_db(app)
     CORS(app)
 
+
+    # @app.after_request decorator sets Access-Control-Allow for Methods and Headers
+    # Delete this after you setup Auth0 configuration
+    @app.after_request
+    def after_request(response):
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,true')
+        response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,PATCH,POST,DELETE,OPTIONS')
+        return response
+
+    @app.route('/athletes')
+    def get_athletes():
+        athletes = Athlete.query.order_by(Athlete.last_name).all()
+
+        return jsonify({
+            'success': True,
+            'athletes': [athlete.athlete_to_dictionary() for athlete in athletes],
+            'total_athletes': len(athletes)
+        })
+
+    @app.route('/stats')
+    def get_stats():
+        stats = Stat.query.order_by(Stat.athlete_id).all()
+
+        return jsonify({
+            'success': True,
+            'athletes': [stat.stat_to_dictionary() for stat in stats],
+            'total_athletes': len(stats)
+        })
 
     @app.route('/')
     def hello_world():

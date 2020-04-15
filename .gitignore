@@ -40,3 +40,5 @@ Thumbs.db
 ######################
 *.pyc
 **/env
+auth0jwt.txt
+apicalls.txt

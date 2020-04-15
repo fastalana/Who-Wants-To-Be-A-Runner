@@ -8,4 +8,4 @@ INSERT INTO stats (id, athlete_id, avg_miles_per_week, avg_vertical_per_week, lo
 VALUES (1, 1, 20, 2500, 26.2, 2, 18, 3000, '2020-09-16');
 
 INSERT INTO stats (id, athlete_id, avg_miles_per_week, avg_vertical_per_week, longest_run, longest_run_2_weeks, race_distance, race_veritcal, race_date)
-VALUES (1, 2, 20, 2500, 100, 10, 26, 5500, '2020-06-24');
+VALUES (2, 2, 20, 2500, 100, 10, 26, 5500, '2020-06-24');

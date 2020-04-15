@@ -1,7 +1,9 @@
 import os
 from flask import Flask, request, abort, jsonify
-from models import setup_db, db, Athlete, Stat
 from flask_cors import CORS
+
+from models import setup_db, Athlete, Stat
+from auth import AuthError, requires_auth
 
 def create_app(test_config=None):
 
@@ -172,3 +174,37 @@ app = create_app()
 
 if __name__ == '__main__':
     app.run()
+
+# Error Handling
+@app.errorhandler(400)
+def bad_request(error):
+    return jsonify({
+        'success': False,
+        'error': 400,
+        'message': 'bad request'
+    }, 400)
+
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({
+        'success': False,
+        'error': 404,
+        'message': 'resource not found'
+    }, 404)
+
+
+@app.errorhandler(422)
+def unprocessable(error):
+    return jsonify({
+        'success': False,
+        'error': 422,
+        'message': 'unprocessable'
+    }, 422)
+
+@app.errorhandler(AuthError)
+def auth_error(error):
+    return jsonify({
+        'success': False,
+        'error': error.status_code,
+        'message': error.error
+    }, error.status_code)

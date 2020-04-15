@@ -46,8 +46,8 @@ def create_app(test_config=None):
 
             return jsonify({
                 'success': True,
-                'created stat_id': athlete.id,
-                'total_stats': len(Athlete.query.all())
+                'created athlete_id': athlete.id,
+                'total_athlete': len(Athlete.query.all())
             })
         except:
             abort(422)  
@@ -88,6 +88,30 @@ def create_app(test_config=None):
         finally:
             db.session.close()  
 
+    @app.route('/stats/<int:stat_id>', methods=['DELETE'])
+    def delete_stat(stat_id):
+        try:
+            stat = Stat.query.filter(Stat.id == stat_id).one_or_none()
+
+            if stat is None:
+                abort(404)
+
+            db.session.delete(stat)
+            db.session.commit()
+
+            return jsonify({
+                'success': True,
+                'deleted_stat_id': stat_id,
+                'total_stats_remaining': len(Stat.query.all())
+            })
+
+        except:
+            abort(422)
+
+        finally:
+            db.session.close()
+    
+    
     @app.route('/')
     def hello_world():
         return "Hello, World!"

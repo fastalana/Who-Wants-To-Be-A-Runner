@@ -44,7 +44,8 @@ class Stat(db.Model):
     __tablename__ = "stats"
 
     id = Column(Integer, primary_key=True)
-    athlete_id = Column(Integer, ForeignKey('athletes.id'), primary_key=True)
+    # athlete_id = Column(Integer, ForeignKey('athletes.id'), primary_key=True)
+    athlete_id = Column(String)
     avg_miles_per_week = Column(Integer)
     avg_vertical_per_week = Column(Integer)
     longest_run = Column(Integer)

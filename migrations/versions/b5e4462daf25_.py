@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: fdbd88e5dbd4
+Revision ID: b5e4462daf25
 Revises: 
-Create Date: 2020-04-13 14:05:23.022758
+Create Date: 2020-04-15 13:34:23.581653
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'fdbd88e5dbd4'
+revision = 'b5e4462daf25'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,7 +26,7 @@ def upgrade():
     )
     op.create_table('stats',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('athlete_id', sa.Integer(), nullable=False),
+    sa.Column('athlete_id', sa.String(), nullable=True),
     sa.Column('avg_miles_per_week', sa.Integer(), nullable=True),
     sa.Column('avg_vertical_per_week', sa.Integer(), nullable=True),
     sa.Column('longest_run', sa.Integer(), nullable=True),
@@ -34,8 +34,7 @@ def upgrade():
     sa.Column('race_distance', sa.Integer(), nullable=True),
     sa.Column('race_veritcal', sa.Integer(), nullable=True),
     sa.Column('race_date', sa.Date(), nullable=True),
-    sa.ForeignKeyConstraint(['athlete_id'], ['athletes.id'], ),
-    sa.PrimaryKeyConstraint('id', 'athlete_id')
+    sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
 

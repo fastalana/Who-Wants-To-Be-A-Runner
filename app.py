@@ -29,6 +29,32 @@ def create_app(test_config=None):
             'total_athletes': len(stats)
         })
 
+    @app.route('/athletes', methods=['POST'])
+    def create_athlete():
+        body = request.get_json()
+
+        first_name = body.get('first_name', None)
+        last_name = body.get('last_name', None)
+
+        if not ('first_name' in body and 'last_name' in body):
+            abort(404)
+
+        try:
+            athlete = Athlete(first_name=first_name, last_name=last_name)
+            db.session.add(athlete)
+            db.session.commit()
+
+            return jsonify({
+                'success': True,
+                'created stat_id': athlete.id,
+                'total_stats': len(Athlete.query.all())
+            })
+        except:
+            abort(422)  
+
+        finally:
+            db.session.close() 
+
     @app.route('/stats', methods=['POST'])
     def create_stat():
         body = request.get_json()

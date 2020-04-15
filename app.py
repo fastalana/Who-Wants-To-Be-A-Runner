@@ -88,6 +88,56 @@ def create_app(test_config=None):
         finally:
             db.session.close()  
 
+    @app.route('/stats/<int:stat_id>', methods=['PATCH'])
+    def update_stat(stat_id):
+        stat = Stat.query.get(stat_id)
+
+        if not stat:
+            abort(404)
+
+        try:
+            body = request.get_json()
+
+            athlete_id = body.get('athlete_id', None)
+            avg_miles_per_week = body.get('avg_miles_per_week', None)
+            avg_vertical_per_week = body.get('avg_vertical_per_week', None)
+            longest_run = body.get('longest_run', None)
+            longest_run_2_weeks = body.get('longest_run_2_weeks', None)
+            race_distance = body.get('race_distance', None)
+            race_veritcal = body.get('race_veritcal', None)
+            race_date = body.get('race_date', None)
+
+            if athlete_id:
+                stat.athlete_id = athlete_id
+            if avg_miles_per_week:
+                stat.avg_miles_per_week = avg_miles_per_week
+            if avg_vertical_per_week:
+                stat.avg_vertical_per_week = avg_vertical_per_week
+            if longest_run:
+                stat.longest_run = longest_run
+            if longest_run_2_weeks:
+                stat.longest_run_2_weeks = longest_run_2_weeks
+            if race_distance:
+                stat.race_distance = race_distance
+            if race_veritcal:
+                stat.race_veritcal = race_veritcal
+            if race_date: 
+                stat.race_date = race_date
+
+            db.session.add(stat)
+            db.session.commit()
+
+            return jsonify({
+                'success': True,
+                'updated stat_id': stat_id,
+            })
+        except:
+            abort(422)
+
+        finally: 
+            db.session.close()
+
+    
     @app.route('/stats/<int:stat_id>', methods=['DELETE'])
     def delete_stat(stat_id):
         try:

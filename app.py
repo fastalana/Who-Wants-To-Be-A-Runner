@@ -12,6 +12,7 @@ def create_app(test_config=None):
     CORS(app)
 
     @app.route('/athletes')
+    @requires_auth('get:all_athletes')
     def get_athletes():
         athletes = Athlete.query.order_by(Athlete.last_name).all()
 
@@ -22,6 +23,7 @@ def create_app(test_config=None):
         })
 
     @app.route('/stats')
+    @requires_auth('get:all_stats')
     def get_stats():
         stats = Stat.query.order_by(Stat.athlete_id).all()
 
@@ -32,6 +34,7 @@ def create_app(test_config=None):
         })
 
     @app.route('/athletes', methods=['POST'])
+    @requires_auth('post:athlete')
     def create_athlete():
         body = request.get_json()
 
@@ -58,6 +61,7 @@ def create_app(test_config=None):
             db.session.close() 
 
     @app.route('/stats', methods=['POST'])
+    @requires_auth('post:stat')
     def create_stat():
         body = request.get_json()
 
@@ -91,6 +95,7 @@ def create_app(test_config=None):
             db.session.close()  
 
     @app.route('/stats/<int:stat_id>', methods=['PATCH'])
+    @requires_auth('patch:stat')
     def update_stat(stat_id):
         stat = Stat.query.get(stat_id)
 
@@ -141,6 +146,7 @@ def create_app(test_config=None):
 
     
     @app.route('/stats/<int:stat_id>', methods=['DELETE'])
+    @requires_auth('delete:stat')
     def delete_stat(stat_id):
         try:
             stat = Stat.query.filter(Stat.id == stat_id).one_or_none()

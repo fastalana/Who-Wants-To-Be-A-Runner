@@ -15,7 +15,7 @@ MEMBER_TOKEN = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlhlbkxVTVBwNkFQR3FF
 class RunnerTestCase(unittest.TestCase):
     
     def setUp(self):
-        
+
         app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://alanabellucci@localhost:5432/runners_test'
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -29,7 +29,20 @@ class RunnerTestCase(unittest.TestCase):
         # Execute after each test
         pass
 
-    # PUT METHODS
+    # GET ENDPOINTS
+    def test_get_athletes(self):
+        response = self.client.get('/athletes')
+        data = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_stats(self):
+        response = self.client.get('/stats')
+        data = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 200)
+    
+    # PUT ENDPOINTS
     def test_add_athlete(self):
         new_athlete = {
             "first_name": "Amelia",
@@ -57,10 +70,25 @@ class RunnerTestCase(unittest.TestCase):
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
-        # self.assertEqual(response.status_code, 401)
-        # self.assertEqual(data['success'], False)
-        # self.assertEqual(data['message'], 'unauthorized')
 
+    # PATCH ENDPOINT
+    def test_update_stat(self):
+        updated_stat = {
+            "athlete_id":"1"
+        }
+
+        response = self.client.patch('/stats/1', json=updated_stat)
+        data = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 200)
+
+    # DELETE ENDPOINT
+    def test_delete_stat(self):
+
+        response = self.client.patch('/stats/1')
+        data = json.loads(response.data)
+
+        self.assertEqual(response.status_code, 200)
 
 # Make the tests conviently executable
 if __name__ == "__main__":

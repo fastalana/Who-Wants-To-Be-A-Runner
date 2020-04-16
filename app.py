@@ -13,7 +13,7 @@ def create_app(test_config=None):
 
     @app.route('/athletes')
     @requires_auth('get:all_athletes')
-    def get_athletes():
+    def get_athletes(token):
         athletes = Athlete.query.order_by(Athlete.last_name).all()
 
         return jsonify({
@@ -24,7 +24,7 @@ def create_app(test_config=None):
 
     @app.route('/stats')
     @requires_auth('get:all_stats')
-    def get_stats():
+    def get_stats(token):
         stats = Stat.query.order_by(Stat.athlete_id).all()
 
         return jsonify({
@@ -35,7 +35,7 @@ def create_app(test_config=None):
 
     @app.route('/athletes', methods=['POST'])
     @requires_auth('post:athlete')
-    def create_athlete():
+    def create_athlete(token):
         body = request.get_json()
 
         first_name = body.get('first_name', None)
@@ -62,7 +62,7 @@ def create_app(test_config=None):
 
     @app.route('/stats', methods=['POST'])
     @requires_auth('post:stat')
-    def create_stat():
+    def create_stat(token):
         body = request.get_json()
 
         athlete_id = body.get('athlete_id', None)
@@ -96,7 +96,7 @@ def create_app(test_config=None):
 
     @app.route('/stats/<int:stat_id>', methods=['PATCH'])
     @requires_auth('patch:stat')
-    def update_stat(stat_id):
+    def update_stat(token, stat_id):
         stat = Stat.query.get(stat_id)
 
         if not stat:
@@ -147,7 +147,7 @@ def create_app(test_config=None):
     
     @app.route('/stats/<int:stat_id>', methods=['DELETE'])
     @requires_auth('delete:stat')
-    def delete_stat(stat_id):
+    def delete_stat(token, stat_id):
         try:
             stat = Stat.query.filter(Stat.id == stat_id).one_or_none()
 

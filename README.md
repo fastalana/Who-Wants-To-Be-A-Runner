@@ -8,7 +8,7 @@ Coaches can retrieve all information about athletes and all of their stats. At a
 
 ## API
 In order to use the API users need to be authenticated. 
-Users can either have a athlete or a coach role. An overview of the API can be found below as well.  We've also provided a Postman Collection.
+Users can either have a athlete or a coach role. An overview of the API can be found below as well.  We've also provided a [Postman Collection](https://github.com/fastalana/WhoWantsToBeARunner/blob/master/who-wants-to-be-a-runner.postman_collection.json).
 
 
 ### Retreiving data (Coaches only)

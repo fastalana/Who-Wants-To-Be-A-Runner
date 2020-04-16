@@ -428,8 +428,8 @@
 							"script": {
 								"id": "5050a5b9-2e15-474e-9981-0e61ec8d2ff1",
 								"exec": [
-									"pm.test(\"Status code is 401\", function () {",
-									"    pm.response.to.have.status(401);",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -468,8 +468,8 @@
 							"script": {
 								"id": "ec1488aa-b4d7-468a-89f5-03484009e69c",
 								"exec": [
-									"pm.test(\"Status code is 401\", function () {",
-									"    pm.response.to.have.status(401);",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -509,8 +509,8 @@
 							"script": {
 								"id": "0aea66ad-0a6e-4533-b192-a8b0af746c78",
 								"exec": [
-									"pm.test(\"Status code is 401\", function () {",
-									"    pm.response.to.have.status(401);",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
 									"});"
 								],
 								"type": "text/javascript"
@@ -611,7 +611,7 @@
 							"script": {
 								"id": "65a195fa-a734-44b7-a7e0-c629b32d1fbb",
 								"exec": [
-									"pm.test(\"Status code is 401\", function () {",
+									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});"
 								],
@@ -642,7 +642,7 @@
 							"script": {
 								"id": "65a195fa-a734-44b7-a7e0-c629b32d1fbb",
 								"exec": [
-									"pm.test(\"Status code is 401\", function () {",
+									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});"
 								],
@@ -673,7 +673,7 @@
 							"script": {
 								"id": "5050a5b9-2e15-474e-9981-0e61ec8d2ff1",
 								"exec": [
-									"pm.test(\"Status code is 401\", function () {",
+									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
 									"});"
 								],
@@ -878,19 +878,19 @@
 	],
 	"variable": [
 		{
-			"id": "8c3bff42-1438-4e9f-85fa-48d1bbab4d36",
+			"id": "c244e95b-8f9a-4df9-8b73-6cc643f8db85",
 			"key": "host",
 			"value": "localhost:5000",
 			"type": "string"
 		},
 		{
-			"id": "e4ee1700-e1cc-45a7-b77a-6a4a5400759f",
+			"id": "3bc9889b-77c1-474f-a795-19227d02c426",
 			"key": "athlete-token",
 			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlhlbkxVTVBwNkFQR3FFNGVKeDVOaiJ9.eyJpc3MiOiJodHRwczovL2Rldi1mYXY1ZHA0ZC5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWU5NWQ3ZDQ0YWQ3YmIwYzEwNjE5YjAzIiwiYXVkIjoicnVubmVycyIsImlhdCI6MTU4NzA1NTA1OSwiZXhwIjoxNTg3MTQxNDU5LCJhenAiOiJVQ0hrank2RlJDb2lLU1R5bWpJQUtrTVFHckVvUjl1YyIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnN0YXQiLCJwYXRjaDpzdGF0IiwicG9zdDphdGhsZXRlIiwicG9zdDpzdGF0Il19.RH2zAyBawJKSIVVha9HJQY2JI7NQRsNkcI97kIm43JUkVT68olvGlRg3cWxolv9yaJmp1ivNkI9N9YFOZNRREYhjwL2KUCR4Z6m0jqV910Fal1x6jYgM0Sk6h89UEC4zW_XiPi3KpiNBRSEAVh3rMphnwkvCpZ9xa2DHWZUIlLH07OjBrsT05_EyWncm-Depj28WbW86AmdwgT92GXLL7L8s2FESXCZ5cr0gPr-xTCOrkg6hM2KvcCJC7dMXVlNUQqLOOam4OX8KkSe-Ys7yn5q_sGU8I7OW6qCCfLBaTDoLrePuPLOpvvxPQY0ENouGclMRGJDMuKcsoc4V4k8HZA",
 			"type": "string"
 		},
 		{
-			"id": "3522fc2b-4aa0-4b3f-ac39-af3f2bfad177",
+			"id": "972a0bd6-0a66-41f9-b72e-c3bce85f3dae",
 			"key": "coach-token",
 			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlhlbkxVTVBwNkFQR3FFNGVKeDVOaiJ9.eyJpc3MiOiJodHRwczovL2Rldi1mYXY1ZHA0ZC5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWU5NWQ4NjE0YWQ3YmIwYzEwNjE5ZDA3IiwiYXVkIjoicnVubmVycyIsImlhdCI6MTU4NzA1NTE1NCwiZXhwIjoxNTg3MTQxNTU0LCJhenAiOiJVQ0hrank2RlJDb2lLU1R5bWpJQUtrTVFHckVvUjl1YyIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZ2V0OmFsbF9hdGhsZXRlcyIsImdldDphbGxfc3RhdHMiXX0.P0X1H7dFir4x4ytkWYi0wdCeEjArVwmUPZ-KUZu_su9ErXV8a48-5v9iF3wOAMEJEJdDKjdZ5m2eth7ENfVGhcTn5Uzb1EqVO33OVFXg9Nme1IWis6XvUsU-yELW8mHmXewMDduQLv0Sc1ArzxMONqkpW5FBZZZwPhceQxddBJ9-FcH-mCDGjrwNDoMb2cwXC3zgKDU2DJZuTOPYfhivkDZboyRtfSOu5sybMm9mgvbBG3gA8fGUXfqQb74kzJ2fXgIBRgsUsJUxyj8uMA2Phe3gB1tC7ueZuI6uJOJzvlf0s1knSp0VJ-e5iJ7hZrluvMbRUEXPpoUy2QjIxtqSKw",
 			"type": "string"

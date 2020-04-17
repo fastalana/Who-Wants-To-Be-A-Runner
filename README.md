@@ -11,13 +11,15 @@ Users can either have a athlete or a coach role. An overview of the API can be f
 
 ### Roles and Permissions 
 #### Coaches 
-_Coaches can retrieve all information about athletes and all of their stats.
+_Coaches can retrieve all information about athletes and all of their stats._
+
 They have the following permissions:
 * get:all_athletes
 * get:all_stats
 
 #### Athletes 
-_Athletes can create an athlete and manage their stats through CRUD operations.
+_Athletes can create an athlete and manage their stats through CRUD operations._
+
 They have the following permissions:
 * post:athlete
 * post:stat

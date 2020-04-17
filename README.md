@@ -26,7 +26,7 @@ They have the following permissions:
 * patch:stat
 * delete:stat
 
-*** Outlined below are examples of each of the API endpoints ***
+** Outlined below are examples of each of the API endpoints **
 
 
 ### Retreiving data (Coaches only)

@@ -22,7 +22,8 @@ class RunnerTestCase(unittest.TestCase):
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
         self.client = app.test_client()
-        self.headers = {'Content-Type': 'application/json'}
+        self.headers_member = {'Content-Type': 'application/json', 'Authorization': MEMBER_TOKEN}
+        self.headers_public = {'Content-Type': 'application/json', 'Authorization': PUBLIC_TOKEN}
         
         db.drop_all()
         db.create_all()
@@ -33,29 +34,26 @@ class RunnerTestCase(unittest.TestCase):
 
     # GET ENDPOINTS
     def test_get_athletes_member(self):
-        self.headers.update({'Authorization': 'Bearer ' + MEMBER_TOKEN})
-        response = self.client.get('/athletes', headers=self.headers)
+        response = self.client.get('/athletes', headers=self.headers_member)
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
 
     def test_get_athletes_public(self):
-        self.headers.update({'Authorization': 'Bearer ' + PUBLIC_TOKEN})
-        response = self.client.get('/athletes', headers=self.headers)
+        response = self.client.get('/athletes', headers=self.headers_public)
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
         # self.assertEqual(response.status_code, 401)
 
     def test_get_stats_member(self):
-        self.headers.update({'Authorization': 'Bearer ' + MEMBER_TOKEN})
-        response = self.client.get('/stats', headers=self.headers)
+        response = self.client.get('/stats', headers=self.headers_member)
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
 
     def test_get_stats_public(self):
-        response = self.client.get('/stats')
+        response = self.client.get('/stats', headers=self.headers_public)
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
@@ -68,8 +66,7 @@ class RunnerTestCase(unittest.TestCase):
             "last_name": "Boone"
         }
 
-        self.headers.update({'Authorization': 'Bearer ' + MEMBER_TOKEN})
-        response = self.client.post('/athletes', json=new_athlete, headers=self.headers)
+        response = self.client.post('/athletes', json=new_athlete, headers=self.headers_member)
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
@@ -80,7 +77,7 @@ class RunnerTestCase(unittest.TestCase):
             "last_name": "Boone"
         }
 
-        response = self.client.post('/athletes', json=new_athlete)
+        response = self.client.post('/athletes', json=new_athlete, headers=self.headers_public)
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
@@ -98,8 +95,7 @@ class RunnerTestCase(unittest.TestCase):
             "race_date":"2020-08-09"
         }
 
-        self.headers.update({'Authorization': 'Bearer ' + MEMBER_TOKEN})
-        response = self.client.post('/stats', json=new_stat, headers=self.headers)
+        response = self.client.post('/stats', json=new_stat, headers=self.headers_member)
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
@@ -116,7 +112,7 @@ class RunnerTestCase(unittest.TestCase):
             "race_date":"2020-08-09"
         }
 
-        response = self.client.post('/stats', json=new_stat)
+        response = self.client.post('/stats', json=new_stat, headers=self.headers_public)
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
@@ -128,8 +124,7 @@ class RunnerTestCase(unittest.TestCase):
             "athlete_id":"1"
         }
 
-        self.headers.update({'Authorization': 'Bearer ' + MEMBER_TOKEN})
-        response = self.client.patch('/stats/1', json=updated_stat, headers=self.headers)
+        response = self.client.patch('/stats/1', json=updated_stat, headers=self.headers_member)
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
@@ -139,7 +134,7 @@ class RunnerTestCase(unittest.TestCase):
             "athlete_id":"1"
         }
 
-        response = self.client.patch('/stats/1', json=updated_stat)
+        response = self.client.patch('/stats/1', json=updated_stat, headers=self.headers_public)
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
@@ -147,14 +142,13 @@ class RunnerTestCase(unittest.TestCase):
 
     # DELETE ENDPOINT
     def test_delete_stat_member(self):
-        self.headers.update({'Authorization': 'Bearer ' + MEMBER_TOKEN})
-        response = self.client.patch('/stats/1', headers=self.headers)
+        response = self.client.patch('/stats/1', headers=self.headers_member)
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)
 
     def test_delete_stat_public(self):
-        response = self.client.patch('/stats/1')
+        response = self.client.patch('/stats/1', headers=self.headers_public)
         data = json.loads(response.data)
 
         self.assertEqual(response.status_code, 200)

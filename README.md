@@ -9,15 +9,15 @@ This is the capstone project for Udacity's Full Stack Web Development Nanodegree
 In order to use the API users need to be authenticated. 
 Users can either have a athlete or a coach role. An overview of the API can be found below as well.  We've also provided a [Postman Collection](https://github.com/fastalana/WhoWantsToBeARunner/blob/master/who-wants-to-be-a-runner.postman_collection.json).
 
-### Permissions 
+### Roles and Permissions 
 #### Coaches 
-_Coaches can retrieve all information about athletes and all of their stats._\n
+_Coaches can retrieve all information about athletes and all of their stats.
 They have the following permissions:
 * get:all_athletes
 * get:all_stats
 
 #### Athletes 
-_Athletes can create an athlete and manage their stats through CRUD operations._\n
+_Athletes can create an athlete and manage their stats through CRUD operations.
 They have the following permissions:
 * post:athlete
 * post:stat

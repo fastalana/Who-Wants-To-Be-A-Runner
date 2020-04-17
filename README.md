@@ -1,14 +1,30 @@
 # Who Wants To Be A Runner?
 
 ## About
-This is the capstone project for Udacity's Full Stack Web Development Nanodegree.  The project provides the backbone to create a running training plan or mid-season check-in for runners.
-Coaches can retrieve all information about athletes and all of their stats. At a future stage, athletes will be given a UI where they can enter their info and receive an updated training plan.
+This is the capstone project for Udacity's Full Stack Web Development Nanodegree.  The project provides the backbone to create a running training plan or mid-season check-in for runners.  At a future stage, athletes will be given a UI where they can enter their info and receive a training plan.
 
 * https://who-wants-to-be-a-runner.herokuapp.com/
 
 ## API
 In order to use the API users need to be authenticated. 
 Users can either have a athlete or a coach role. An overview of the API can be found below as well.  We've also provided a [Postman Collection](https://github.com/fastalana/WhoWantsToBeARunner/blob/master/who-wants-to-be-a-runner.postman_collection.json).
+
+### Permissions 
+#### Coaches 
+_Coaches can retrieve all information about athletes and all of their stats._\n
+They have the following permissions:
+* get:all_athletes
+* get:all_stats
+
+#### Athletes 
+_Athletes can create an athlete and manage their stats through CRUD operations._\n
+They have the following permissions:
+* post:athlete
+* post:stat
+* patch:stat
+* delete:stat
+
+*** Outlined below are examples of each of the API endpoints ***
 
 
 ### Retreiving data (Coaches only)

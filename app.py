@@ -5,6 +5,7 @@ from flask_cors import CORS
 from models import setup_db, db, Athlete, Stat
 from auth import AuthError, requires_auth
 
+
 def create_app(test_config=None):
 
     app = Flask(__name__)
@@ -18,7 +19,10 @@ def create_app(test_config=None):
 
         return jsonify({
             'success': True,
-            'athletes': [athlete.athlete_to_dictionary() for athlete in athletes],
+            'athletes': [
+                athlete.athlete_to_dictionary()
+                for athlete in athletes
+                ],
             'total_athletes': len(athletes)
         })
 
@@ -55,10 +59,10 @@ def create_app(test_config=None):
                 'total_athlete': len(Athlete.query.all())
             })
         except:
-            abort(422)  
+            abort(422)
 
         finally:
-            db.session.close() 
+            db.session.close()
 
     @app.route('/stats', methods=['POST'])
     @requires_auth('post:stat')
@@ -78,8 +82,14 @@ def create_app(test_config=None):
             abort(404)
 
         try:
-            stat = Stat(athlete_id=athlete_id, avg_miles_per_week=avg_miles_per_week, avg_vertical_per_week=avg_vertical_per_week, longest_run=longest_run, 
-                longest_run_2_weeks=longest_run_2_weeks, race_distance=race_distance, race_veritcal=race_veritcal, race_date=race_date)
+            stat = Stat(athlete_id=athlete_id,
+                        avg_miles_per_week=avg_miles_per_week,
+                        avg_vertical_per_week=avg_vertical_per_week,
+                        longest_run=longest_run,
+                        longest_run_2_weeks=longest_run_2_weeks,
+                        race_distance=race_distance,
+                        race_veritcal=race_veritcal,
+                        race_date=race_date)
             db.session.add(stat)
             db.session.commit()
 
@@ -89,10 +99,10 @@ def create_app(test_config=None):
                 'total_stats': len(Stat.query.all())
             })
         except:
-            abort(422)  
+            abort(422)
 
         finally:
-            db.session.close()  
+            db.session.close()
 
     @app.route('/stats/<int:stat_id>', methods=['PATCH'])
     @requires_auth('patch:stat')
@@ -128,7 +138,7 @@ def create_app(test_config=None):
                 stat.race_distance = race_distance
             if race_veritcal:
                 stat.race_veritcal = race_veritcal
-            if race_date: 
+            if race_date:
                 stat.race_date = race_date
 
             db.session.add(stat)
@@ -141,10 +151,9 @@ def create_app(test_config=None):
         except:
             abort(422)
 
-        finally: 
+        finally:
             db.session.close()
 
-    
     @app.route('/stats/<int:stat_id>', methods=['DELETE'])
     @requires_auth('delete:stat')
     def delete_stat(token, stat_id):
@@ -162,14 +171,12 @@ def create_app(test_config=None):
                 'deleted_stat_id': stat_id,
                 'total_stats_remaining': len(Stat.query.all())
             })
-
         except:
             abort(422)
 
         finally:
             db.session.close()
-    
-    
+
     @app.route('/')
     def hello_world():
         return "Hello, World!"
@@ -199,7 +206,6 @@ def create_app(test_config=None):
             'message': 'resource not found'
         }, 404)
 
-
     @app.errorhandler(422)
     def unprocessable(error):
         return jsonify({
@@ -218,8 +224,8 @@ def create_app(test_config=None):
 
     return app
 
+
 app = create_app()
 
 if __name__ == '__main__':
     app.run()
-

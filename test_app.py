@@ -138,11 +138,12 @@ class RunnerTestCase(unittest.TestCase):
             "athlete_id": "1"
         }
 
-        response = self.client.patch('/stats/1', json=updated_stat, headers=self.headers_public)
+        # response = self.client.patch('/stats/1', json=updated_stat, headers=self.headers_public)
+        response = self.client.patch('/stats/1', json=updated_stat)
         data = json.loads(response.data)
 
-        self.assertEqual(response.status_code, 200)
-        # self.assertEqual(response.status_code, 401)
+        # self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 401)
 
     # DELETE ENDPOINT
     def test_delete_stat_member(self):
